@@ -1,4 +1,4 @@
-# Simple Native ERC20 Token and Vault
+# Native ERC20 Token and Vault
 
 Build a simple native currency, to be used as the in-game currency for the DeFi Platform.
 

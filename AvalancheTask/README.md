@@ -39,7 +39,7 @@ If you encounter any issue, do not hesitate to use the issues tab on this github
 ## Authors
 
 milk-maid  
-ex. [Roqbell](https://twitter.com/the_roqbell)
+[Roqbell](https://twitter.com/the_roqbell)
 
 <!-- ## License
 

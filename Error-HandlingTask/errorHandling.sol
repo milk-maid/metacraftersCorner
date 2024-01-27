@@ -2,41 +2,34 @@
 pragma solidity ^0.8.13;
 
 contract ErrorHandling {
-    function testRequire(uint _i) public pure {
-        // Require should be used to validate conditions such as:
-        // - inputs
-        // - conditions before execution
-        // - return values from calls to other functions
-        require(_i > 10, "Input must be greater than 10");
+
+    uint8 public ind;
+
+    error NotAllowedInYet(bytes amount);
+
+    function adultsOnly(uint8 _age) public returns(string memory) {
+        // require statement in action
+        require(_age > 18, "Only for ADULTS!!!");
+        ind = _age;
+        return "Enjoy";
     }
 
-    function testRevert(uint _i) public pure {
-        // Revert is useful when the condition to check is complex.
-        // This code does the exact same thing as the example above
-        if (_i <= 10) {
-            revert("Input must be greater than 10");
+    function childrenCorner(uint8 _age) public returns(uint8) {
+        // revert() is used when the condition is complex.
+        if (_age > 10) {
+            revert("Only childrn are allowed here");
         }
+        return ind = _age;
     }
 
-    uint public num;
-
-    function testAssert() public view {
-        // Assert should only be used to test for internal errors,
-        // and to check invariants.
-
-        // Here we assert that num is always equal to 0
-        // since it is impossible to update the value of num
-        assert(num == 0);
+    function assertChildren(uint8 _input) public view {
+        assert(ind < _input);
     }
 
-    // custom error
-    error InsufficientBalance(uint balance, uint withdrawAmount);
-
-    function testCustomError(uint _withdrawAmount) public view {
-        uint bal = address(this).balance;
-        if (bal < _withdrawAmount) {
-            revert InsufficientBalance({balance: bal, withdrawAmount: _withdrawAmount});
+    function useCustomError(uint8 _amount) public view {
+        // revert used internally to handle errors
+        if (ind < _amount) {
+            revert NotAllowedInYet({amount: abi.encode(_amount)});
         }
     }
 }
-

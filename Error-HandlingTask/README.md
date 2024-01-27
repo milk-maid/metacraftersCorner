@@ -6,7 +6,7 @@ Build a contract to test out Error Handling with `require`, `assert`, `revert` a
 
 This Ethereum smart contract, named `ErrorHandling`, demonstrates various error-handling mechanisms in Solidity. It provides examples of using `require` and `revert` statements to validate conditions such as input values and execution requirements. The contract also showcases the use of `assert` for testing internal errors and invariants.
 
-In addition, the contract introduces a custom error, `InsufficientBalance`, to handle scenarios where a withdrawal amount exceeds the contract's balance. This exemplifies how to create and utilize custom errors for more specific and informative error messaging. Developers can explore this codebase to gain insights into best practices for handling errors in their Solidity smart contracts.
+In addition, the contract introduces a custom error, `NotAllowedInYet`, to handle scenarios where a withdrawal amount exceeds the contract's balance. This exemplifies how to create and utilize custom errors for more specific and informative error messaging. Developers can explore this codebase to gain insights into best practices for handling errors in their Solidity smart contracts.
 
 ## Getting Started
 

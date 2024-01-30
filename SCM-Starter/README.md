@@ -1,11 +1,11 @@
-# A Simple DApp ::: A Smart Contract with a Smart Contract plugged in
+# A Simple DApp ::: A Simple FrontEnd UI Interface with a Smart Contract plugged in
 
-Intergrate a UI with martContract running on the backend as directed.`the
-Starter contract we were given by metamCrafters was used in building the project`
+reffered to as a decentralized Application.
 
 ## Description
 
-THis Project is to test for integration of SmartContrcat Backend to Smart Contract in what we can call a DApp where information s and computations are immutable as it is stored on-chain
+Intergrate a UI with martContract running on the backend as directed.`the
+Starter contract as provided by metamCraft was used in building the project` &&& the Project is to test integration of SmartContrcat Backend to frontend in what we refer to as DApp in the Web3Space where informations and computations are immutable as it is stored on-chain
 
 ## Getting Started
 
@@ -18,7 +18,7 @@ Use the ```hardhat local environment as encouraged as the project``` to build th
 
 ### Executing program
 
-* The solidity code is to be integrated to the frontend for end users to use
+* The solidity code is to be integrated to the frontend for end users to use; HOW:::
 
 ```javascript
 

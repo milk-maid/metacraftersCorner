@@ -1,40 +1,55 @@
-// SPDX-License-Identifier: UNLICENSED
-pragma solidity ^0.8.9;
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
 
-//import "hardhat/console.sol";
+contract SimpleWallet {
+    address public owner;
+    mapping(address => uint256) public balances;
 
-contract FrontCraft {
-    string public name;
-    uint256 public remains;
-    address payable public defaultAdd;
+    event saveIt(address indexed account, uint256 amount);
+    event comotIt(address indexed account, uint256 amount);
 
-    function Deposit(uint256 _amount, string calldata _name) public payable returns(uint256){
-        uint _previousremains = remains;
-        name = _name;
-        remains = remains + _amount;
-        assert(remains == _previousremains + _amount); //to ensure tx success
-        emit stakeSome(_amount);
-        return remains;
+    modifier onlyOwner() {
+        require(msg.sender == owner, "Not the owner");
+        _;
     }
 
-    function Withdrawal(uint256 _comotKudiAmount, string calldata _name) public returns(uint256){ 
-        uint _previousremains = remains;
-        if (remains < _comotKudiAmount) {
-            revert Insufficientremains({
-                remains: remains,
-                comotKudiAmount: _comotKudiAmount
-            });
-        }
-        remains -= _comotKudiAmount;
-        name  = name;
-        assert(remains == (_previousremains - _comotKudiAmount));
-        emit comotKudi(_comotKudiAmount);
-        return remains;
+    constructor() {
+        owner = msg.sender;
     }
 
-    event stakeSome(uint256 indexed amount);
-    event comotKudi(uint256 indexed amount);
-    error Insufficientremains(uint256 remains, uint256 comotKudiAmount);
+    function saveKudi() external payable {
+        require(msg.value > 0, "Deposit amount must be greater than 0");
+        balances[msg.sender] += msg.value;
+        emit saveIt(msg.sender, msg.value);
+    }
 
+    function comotKudi(uint256 amount) external {
+        require(amount > 0, "Withdrawal amount must be greater than 0");
+        require(balances[msg.sender] >= amount, "Insufficient balance");
+        
+        payable(msg.sender).transfer(amount);
+        balances[msg.sender] -= amount;
+        emit comotIt(msg.sender, amount);
+    }
+
+    function getBalance() external view returns (uint256) {
+        return balances[msg.sender];
+    }
+
+    function transfer(address to, uint256 amount) external {
+        require(amount > 0, "Transfer amount must be greater than 0");
+        require(balances[msg.sender] >= amount, "Insufficient balance");
+
+        balances[msg.sender] -= amount;
+        balances[to] += amount;
+    }
+
+    function getOwner() public view returns(address) {
+        return owner;
+    }
+
+    function changeOwner(address newOwner) external onlyOwner {
+        require(newOwner != address(0), "Invalid new owner address");
+        owner = newOwner;
+    }
 }
-    
